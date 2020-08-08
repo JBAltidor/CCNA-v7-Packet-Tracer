@@ -1,0 +1,36 @@
+*******************5.2.7-packet-tracer---configure-and-modify-standard-ipv4-acls*******************
+
+Router 1 configuration
+======================
+en 								#To enter privileged EXEC mode.Short for "enable"
+conf t								#To enter configuration mode.Short for "configure terminal"
+
+ip access-list standard BRANCH-OFFICE-POLICY			#To create the named ACL
+permit host 192.168.30.3
+permit 192.168.40.0 0.0.0.255
+exit
+
+int g0/0/0
+ip access-group BRANCH-OFFICE-POLICY out			#To apply the ACL to outboud traffic
+exit
+
+ip access-list standard BRANCH-OFFICE-POLICY
+30 permit 209.165.200.224 0.0.0.31				#To add rules in a specific order to the ACL		
+40 deny any
+end
+
+Router 3 configuration
+======================
+en
+conf t 
+
+access-list 1 remark Allow R1 LANs Access			#To add a comment to the numbered ACL 1
+access-list 1 permit 192.168.10.0 0.0.0.255
+access-list 1 permit 192.168.20.0 0.0.0.255
+access-list 1 deny any
+
+interface g0/0/0
+ip access-group 1 out						#To apply the ACL to outboud traffic
+
+exit
+

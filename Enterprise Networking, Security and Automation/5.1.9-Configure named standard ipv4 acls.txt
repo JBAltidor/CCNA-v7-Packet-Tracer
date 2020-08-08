@@ -1,0 +1,21 @@
+*********************5.1.9-packet-tracer---configure-named-standard-ipv4-acls*********************
+
+
+Router 1 configuration
+======================
+en							#To enter privileged EXEC mode.Short for "enable"
+conf t							#To enter configuration mode.Short for "configure terminal"
+
+ip access-list standard File_Server_Restrictions    	#To create the named ACL
+permit host 192.168.20.4				#To permit the host with this IP
+permit host 192.168.100.100
+deny any						#Since ACLs have an implicit deny statement ,this is for debugging purposes,
+							#to see with IPs are blocked using show commands.
+
+int fa0/1						#To enter interface configuration mode
+ip access-group File_Server_Restrictions out		#To apply the ACL for outbound traffic
+end
+
+copy runn start					#To back up the running configuration file to NVRAM 
+
+

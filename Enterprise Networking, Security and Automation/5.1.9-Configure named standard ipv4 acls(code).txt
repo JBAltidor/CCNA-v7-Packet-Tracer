@@ -1,0 +1,21 @@
+*********************5.1.9-packet-tracer---configure-named-standard-ipv4-acls*********************
+
+
+Router 1 configuration
+======================
+en							
+conf t							
+
+ip access-list standard File_Server_Restrictions    	
+permit host 192.168.20.4				
+permit host 192.168.100.100
+deny any						
+							
+
+int fa0/1						
+ip access-group File_Server_Restrictions out		
+end
+
+copy runn start					
+
+
