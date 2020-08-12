@@ -1,0 +1,25 @@
+**********************5.1.8-packet-tracer---configure-numbered-standard-ipv4-acls**********************
+
+Router 2 configuration
+======================
+EN 							
+CONF T							
+
+access-list 1 deny 192.168.11.0 0.0.0.255		
+access-list 1 permit any				
+
+int g0/0						
+ip access-group 1 out					
+end
+
+Router 3 configuration 
+======================
+en
+conf t
+
+access-list 1 deny 192.168.10.0 0.0.0.255 
+access-list 1 permit any 
+
+int g0/0
+ip access-group 1 out
+end

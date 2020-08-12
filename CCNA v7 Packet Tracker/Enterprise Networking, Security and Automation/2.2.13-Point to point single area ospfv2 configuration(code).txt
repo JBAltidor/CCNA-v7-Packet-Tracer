@@ -1,0 +1,49 @@
+*******************************2.2.13-packet-tracer---point-to-point-single-area-ospfv2-configuration*******************************
+
+Router 1 configuration
+======================
+en 						
+conf t	
+					
+router ospf 10					
+router-id 1.1.1.1	
+			
+network 192.168.10.1 0.0.0.255 area 0		
+network 10.1.1.1 0.0.0.3 area 0		
+network 10.1.1.5 0.0.0.3 area 0
+
+passive-interface g0/0/0			
+
+Router 2 configuration
+======================
+en 
+conf t 
+
+router ospf 10
+router-id 2.2.2.2
+
+network 192.168.20.1 0.0.0.0 area 0
+network 10.1.1.2 0.0.0.0 area 0
+network 10.1.1.9 0.0.0.0 area 0
+
+passive-interface g0/0/0
+
+
+Router 3 configuration
+======================
+en 
+conf t 
+
+router ospf 10
+router-id 3.3.3.3
+
+passive-interface g0/0/0
+
+int g0/0/0
+ip ospf 10 area 0
+
+int s0/1/0 
+ip ospf 10 area 0
+
+int s0/1/1
+ip ospf 10 area 0

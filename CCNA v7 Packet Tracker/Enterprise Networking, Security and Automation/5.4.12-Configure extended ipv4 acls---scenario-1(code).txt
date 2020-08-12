@@ -1,0 +1,21 @@
+*****************************5.4.12-packet-tracer---configure-extended-ipv4-acls---scenario-1*****************************
+
+Router 1 configuration
+======================
+en										
+conf t										
+
+access-list 100 permit tcp 172.22.34.64 0.0.0.31 host 172.22.34.62 eq ftp
+access-list 100 permit icmp 172.22.34.64 0.0.0.31 host 172.22.34.62 
+
+int g0/0
+ip access-group 100 in
+exit
+
+ip access-list extended HTTP_ONLY
+permit tcp 172.22.34.96 0.0.0.15 host 172.22.34.62 eq www
+permit icmp 172.22.34.96 0.0.0.15 host 172.22.34.62
+exit
+
+int g0/1
+ip access-group HTTP_ONLY in

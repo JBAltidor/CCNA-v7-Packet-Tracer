@@ -1,0 +1,28 @@
+****************************5.4.13-packet-tracer---configure-extended-ipv4-acls---scenario-2****************************
+
+Router 1 configuration
+======================
+en 								#To enter privileged EXEC mode.Short for "enable"
+conf t								#To enter configuration mode.Short for "configure terminal"
+
+
+ip access-list extended ACL
+
+deny tcp host 172.31.1.101 host 64.101.255.254 eq 80		#To deny PC1 access to HTTP and HTTPS services on Server1 and Server2.
+deny tcp host 172.31.1.101 host 64.101.255.254 eq 443
+deny tcp host 172.31.1.101 host 64.103.255.254 eq 80
+deny tcp host 172.31.1.101 host 64.103.255.254 eq 443
+
+
+deny tcp host 172.31.1.102 host 64.101.255.254 eq 21		#To deny PC2 to access FTP services on Server1 and Server2.
+deny tcp host 172.31.1.102 host 64.103.255.254 eq 21
+
+deny icmp host 172.31.1.103 host 64.101.255.254 		#To deny PC3 to ping Server1 and Server2.
+deny icmp host 172.31.1.103 host 64.103.255.254 
+
+permit ip any any						#To counter the implicit deny any any
+
+int g0/0
+ip access-group ACL in						#To apply the acl to inbound traffic
+
+exit

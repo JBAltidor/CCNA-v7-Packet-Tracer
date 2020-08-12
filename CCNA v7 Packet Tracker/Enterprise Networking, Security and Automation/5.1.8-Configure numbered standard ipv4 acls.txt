@@ -1,0 +1,25 @@
+**********************5.1.8-packet-tracer---configure-numbered-standard-ipv4-acls**********************
+
+Router 2 configuration
+======================
+EN 							#To enter privileged EXEC mode.Short for "enable"
+CONF T							#To enter configuration mode.Short for "configure terminal"
+
+access-list 1 deny 192.168.11.0 0.0.0.255		#To deny access to the 192.168.11.0/24 network
+access-list 1 permit any				#To counter the implicit deny statement
+
+int g0/0						#To enter interface configuration mode
+ip access-group 1 out					#To apply the acl for outboud traffic
+end
+
+Router 3 configuration 
+======================
+en
+conf t
+
+access-list 1 deny 192.168.10.0 0.0.0.255 
+access-list 1 permit any 
+
+int g0/0
+ip access-group 1 out
+end
