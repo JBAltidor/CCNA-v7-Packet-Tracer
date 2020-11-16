@@ -1,0 +1,60 @@
+user-01
+10.10.10.101
+user-02
+128.107.20.30
+user-03
+128.107.30.25
+user-04
+172.14.5.60==>128.107.30.30
+
+***Router configuration
+en 
+conf t
+hostname RTA
+line console 0
+password cisco
+login
+line vty 0 15
+password cisco
+login
+line aux 0
+password cisco
+login
+enable secret class
+service password-encryption
+banner motd #Authorized access only!#
+int g0/1
+description Link to Switch 2
+ip address 10.10.11.1 255.255.255.0
+ipv6 address 2001:db8:acad:200::1/64
+no sh
+int g0/0
+description Link to Switch 1
+ip address 10.10.10.1 255.255.255.0
+ipv6 address 2001:db8:acad:100::1/64
+no sh
+exit
+copy running-config startup-config
+****Switch 2 config
+en 
+conf t
+hostname ASw-2
+line console 0
+password cisco
+login
+line vty 0 4
+password cisco
+login
+line aux 0
+password cisco
+login
+enable secret class
+service password-encryption
+banner motd #Authorized access only!#
+int Vlan 1
+ip address 10.10.11.2 255.255.255.0
+no sh
+ip default-gateway 10.10.11.1 
+copy running-config startup-config
+
+

@@ -1,0 +1,75 @@
+**SWA
+en 
+conf t
+int range g0/1-2,f0/21-22
+switchport mode trunk
+switchport nonegotiate
+exit
+
+int range g0/1-2
+sh
+channel-group 1 mode desirable
+No sh
+
+int port-channel 1
+switchport mode trunk
+exit
+
+int range f0/21-22
+sh
+channel-group 2 mode active
+No sh
+
+int port-channel 2
+switchport mode trunk
+
+
+**SWB
+en 
+conf t
+int range g0/1-2,f0/23-24
+switchport mode trunk
+switchport nonegotiate
+exit
+
+int range g0/1-2
+sh
+channel-group 1 mode desirable
+No sh
+
+int port-channel 1
+switchport mode trunk
+
+int range f0/23-24
+sh
+channel-group 3 mode passive
+No sh
+
+int port-channel 3
+switchport mode trunk
+
+
+
+**SWC
+en 
+conf t
+int range f0/21-22,f0/23-24
+switchport mode trunk
+switchport nonegotiate
+exit
+
+int range f0/21-22
+sh
+channel-group 2 mode active
+No sh
+
+int port-channel 2
+switchport mode trunk
+
+int range f0/23-24
+sh
+channel-group 3 mode active
+No sh
+
+int port-channel 3
+switchport mode trunk

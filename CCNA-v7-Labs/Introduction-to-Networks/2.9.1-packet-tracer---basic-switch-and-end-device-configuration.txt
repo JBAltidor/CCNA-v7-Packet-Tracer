@@ -1,0 +1,42 @@
+***Switch 1
+en
+conf t
+hostname Class-A
+line vty 0 15
+password 8ubRu
+login
+line console 0
+password 8ubRu
+login
+exit 
+enable secret C9WrE
+service password-encryption
+banner motd #Autorized access only#
+conf t
+interface Vlan 1 
+ip address 10.10.10.100 255.255.255.0
+no shutdown
+exit
+exit
+copy running-conf startup-conf
+
+***Switch 2
+en
+conf t
+hostname Class-B
+line vty 0 15
+password 8ubRu
+login
+line console 0
+password 8ubRu
+login
+exit 
+enable secret C9WrE
+service password-encryption
+banner motd #Autorized access only#
+interface Vlan 1 
+ip address 10.10.10.150 255.255.255.0
+no shutdown
+exit
+exit
+copy running-conf startup-conf

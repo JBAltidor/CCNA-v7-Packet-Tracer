@@ -1,0 +1,67 @@
+***ROUTER CONFIGURATION
+en 
+conf t
+hostname RTA
+line console 0
+password cisco
+login
+line aux 0
+password cisco
+login
+line vty 0 15
+password cisco
+login
+enable secret class
+service password-encryption
+banner motd #Autorized access only#
+int g0/0
+description Link to Switch1
+ipv6 unicast-routing
+ip address 172.14.5.1 255.255.255.0
+ipv6 address 2001:DB8:CAFE:1::1/64
+no sh
+exit
+int g0/1
+description Link to Switch2
+ipv6 unicast-routing
+ip address 172.14.10.1 255.255.255.0
+ipv6 address 2001:DB8:CAFE:2::1/64
+no sh
+exit
+copy runn start
+
+
+***ASw-2 conf
+en 
+conf t
+hostname ASw-2
+line console 0
+password cisco
+login
+line aux 0
+password cisco
+login
+line vty 0 4
+password cisco
+login
+enable secret class
+service password-encryption
+banner motd #Autorized access only#
+int Vlan 1
+description virtual 2 switch
+ip address 172.14.10.2 255.255.255.0
+ipv6 address 2001:DB8:CAFE:2::2/64
+no sh
+exit
+ip default-gateway 172.14.10.1
+exit
+copy runn start
+
+***PC config 
+user-01
+ipv4 172.14.5.50
+gateway 172.14.5.1
+ipv6 2001:DB8:CAFE:1::50
+gateway 2001:DB8:CAFE:1::1
+...
+

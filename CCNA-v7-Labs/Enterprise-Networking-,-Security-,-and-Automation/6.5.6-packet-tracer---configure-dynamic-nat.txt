@@ -1,0 +1,13 @@
+**R2
+en
+conf t
+access-list 1 permit 172.16.0.0 0.0.255.255
+
+ip nat pool 1 209.165.200.239 209.165.200.240 netmask 255.255.255.224
+ip nat inside source list 1 pool NAT-POOL
+
+int s0/0/1
+ip nat inside
+
+int s0/0/0
+ip nat outside

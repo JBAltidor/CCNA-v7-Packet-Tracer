@@ -1,0 +1,14 @@
+en 
+sh spann vlan 1
+
+S1 
+g0/1 Desg FWD 4
+g0/2 Root FWD 4
+
+S2 ROOT BRIDGE
+g0/1 Desg FWD 4
+g0/2 Desg FWD 4
+
+S3
+g0/1 Root FWD 4
+g0/2 Altn BLK 4

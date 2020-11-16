@@ -1,0 +1,82 @@
+**S1
+en
+conf t
+hostname S1
+
+int range f0/21-22
+switchport mode trunk
+switchport nonegotiate
+
+
+int range f0/21-22
+sh
+channel-group 1 mode desirable
+no sh
+
+int port-channel 1
+switchport mode trunk
+
+int range g0/1-2
+sh
+channel-group 2 mode active
+no sh
+
+int port-channel 2
+switchport mode trunk
+
+spanning-tree vlan 1 root primary
+
+
+
+**S2
+en
+conf t
+hostname S2
+
+int range f0/23-24
+switchport mode trunk
+switchport nonegotiate
+sh
+
+int range f0/23-24
+sh
+channel-group 3 mode passive
+no sh
+
+int port-channel 3
+switchport mode trunk
+
+int range g0/1-2
+sh
+channel-group 2 mode active
+no sh
+
+
+
+
+
+**S3
+en
+conf t
+hostname S3
+
+int range f0/21-22 
+switchport mode trunk
+switchport nonegotiate
+
+
+int range f0/21-22
+sh
+channel-group 1 mode desirable
+no sh
+
+int port-channel 1
+switchport mode trunk
+
+int range f0/23-24
+channel-group 3 mode active
+
+int port-channel 3
+switchport mode trunk
+
+

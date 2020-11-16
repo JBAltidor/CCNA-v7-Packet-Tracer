@@ -1,0 +1,26 @@
+**R2
+EN
+CONF T
+
+ip access-list standard R2NAT
+permit 192.168.10.0 0.0.0.255
+permit 192.168.20.0 0.0.0.255
+permit 192.168.30.0 0.0.0.255
+exit
+
+ip nat pool R2POOL 209.165.202.129 209.165.202.129 netmask 255.255.255.252
+ip nat inside source list R2NAT pool R2POOL
+
+ip nat inside source static 192.168.20.254 209.165.202.130
+
+int fa0/0
+ip nat inside 
+
+int s0/0/1
+ip nat inside
+
+int s0/1/0
+ip nat outside
+
+int s0/0/0
+ip nat inside
