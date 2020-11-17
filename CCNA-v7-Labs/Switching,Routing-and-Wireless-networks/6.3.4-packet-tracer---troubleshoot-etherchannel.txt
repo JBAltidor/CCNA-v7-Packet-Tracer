@@ -1,3 +1,0 @@
-verify trunking
-sh running-conf
-sh runn | include switchport mode access
